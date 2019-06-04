@@ -1,1 +1,0 @@
-print("ni hao  a")
