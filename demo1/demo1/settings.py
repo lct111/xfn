@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'b@(hu)17blq0v)f#21a*n&0wi6(j2k0ggta!wz&tmksfel*px!'
+SECRET_KEY = '@i+h3)mq8m+ioa#i0y2&l16t^+!=s+^$xf(34odjs^vs&-&bxj'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -30,6 +30,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+#将创建的应用注册
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'demo1.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'template')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -74,6 +75,7 @@ WSGI_APPLICATION = 'demo1.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+#django默认使用sqlite数据库
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
