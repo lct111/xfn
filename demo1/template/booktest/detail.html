@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>详情页</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <script src="/static/js/main.js"></script>
 </head>
 <body>
-    <h3>详情页</h3>
+    <div id="a1">
+        <h3>详情页</h3>
     角色列表
     <ul>
         {% for i in book.heroinfo_set.all %}
-        <li>{{ i.name }} {{i.content}}</li>
+        <li>{{ i.name }} {{i.content}} <a href="{% url 'booktest:deletehero' i.id %}">删除</a></li>
         {% endfor %}
     </ul>
     <a href="{% url 'booktest:list' %}">返回列表页</a>
+    </div>
 
 </body>
 </html>

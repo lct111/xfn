@@ -3,18 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>列表页</title>
+      <link rel="stylesheet" href="/static/css/main.css">
+    <script src="/static/js/main.js"></script>
 </head>
 <body>
-    <h3>列表页</h3>
+    <div id="a1">
+         <h3>列表页</h3>
     <ul>
         {% for i in books %}
         {% if forloop.counter == 1 %}
-            <li style="background-color: red"> {{ forloop.counter }} <a href="{% url 'booktest:detail' i.id %}"> {{ i.title }} </a> </li>
+            <li style="background-color: red"> {{ forloop.counter }} <a href="{% url 'booktest:detail' i.id %}"> {{ i.title }} </a>
+                <a href="{% url 'booktest:deletebook' i.id %}">删除</a> </li>
         {% else %}
-            <li> {{ forloop.counter }} <a href="{% url 'booktest:detail' i.id %}"> {{ i.title }} </a> </li>
+            <li> {{ forloop.counter }} <a href="{% url 'booktest:detail' i.id %}"> {{ i.title }} <a href="{% url 'booktest:deletebook' i.id %}">删除</a> </a> </li>
         {% endif %}
         {% endfor %}
     </ul>
     <a href="{% url 'booktest:index' %}">返回首页</a>
+    </div>
 </body>
 </html>

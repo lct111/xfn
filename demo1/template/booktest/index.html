@@ -3,9 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>首页</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <script src="/static/js/main.js"></script>
 </head>
 <body>
-    <h3>首页</h3>
-    <a href="{% url 'booktest:list' %}">进入列表页</a>
+    <div id="a1">
+        <h3>首页</h3>
+        <div id="a2">
+            <img id="myimg" src="/static/ads/2.jpg" alt="">
+<!--            <img src="/static/ads/3.jpg" alt="">-->
+        </div>
+        <a href="{% url 'booktest:list' %}">进入列表页</a>
+    </div>
 </body>
 </html>
