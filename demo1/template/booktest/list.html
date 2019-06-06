@@ -9,12 +9,12 @@
     <ul>
         {% for i in books %}
         {% if forloop.counter == 1 %}
-            <li style="background-color: red"> {{ forloop.counter }} <a href="/detail/{{ i.id }}/"> {{ i.title }} </a> </li>
+            <li style="background-color: red"> {{ forloop.counter }} <a href="{% url 'booktest:detail' i.id %}"> {{ i.title }} </a> </li>
         {% else %}
-            <li> {{ forloop.counter }} <a href="/detail/{{ i.id }}/"> {{ i.title }} </a> </li>
+            <li> {{ forloop.counter }} <a href="{% url 'booktest:detail' i.id %}"> {{ i.title }} </a> </li>
         {% endif %}
         {% endfor %}
     </ul>
-    <a href="/">返回首页</a>
+    <a href="{% url 'booktest:index' %}">返回首页</a>
 </body>
 </html>
