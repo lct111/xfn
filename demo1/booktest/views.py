@@ -50,5 +50,6 @@ def addhero(req,id):
         hero.name=req.POST.get('heroname')
         hero.content=req.POST.get('herocontent')
         hero.book=book
+        hero.gender=req.POST.get('sex')
         hero.save()
         return HttpResponseRedirect('/detail/%s/'%(id,))
