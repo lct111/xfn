@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>addhero</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body>
+    <div id="a1"></div>
+        <h1>书名:{{ book.title }}</h1>
+        <h2>添加角色</h2>
+        <form action="{% url 'booktest:addhero' book.id %}" method="post">
+            角色名：<input type="text" name="heroname">
+            <br>
+            绝招：<input type="text" name="herocontent">
+            <br>
+            <input type="submit" value="提交">
+
+        </form>
+
+
+</body>
+</html>

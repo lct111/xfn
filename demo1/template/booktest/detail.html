@@ -9,12 +9,18 @@
 <body>
     <div id="a1">
         <h3>详情页</h3>
-    角色列表
+        {% if book %}
+        <h3>{{ book.title }}</h3>
     <ul>
         {% for i in book.heroinfo_set.all %}
         <li>{{ i.name }} {{i.content}} <a href="{% url 'booktest:deletehero' i.id %}">删除</a></li>
+        {% empty %}
+        没有角色信息
         {% endfor %}
     </ul>
+        {% endif %}
+    <a href="{% url 'booktest:addhero' book.id %}">添加角色</a>
+    <br>
     <a href="{% url 'booktest:list' %}">返回列表页</a>
     </div>
 
