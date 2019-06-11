@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>结果页</title>
+</head>
+<body>
+    <h3>投票结果</h3>
+    <h1>{{ question.title }}</h1>
+    <ul>
+        {% for i in question.toup_set.all %}
+        <li>{{ i.name }}--得票数：{{ i.vote }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'pulls:index' %}">返回</a>
+</body>
+</html>
