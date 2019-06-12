@@ -1,0 +1,36 @@
+{% extends 'pulls/base.html' %}
+
+{% block title %}
+    登录
+{% endblock %}
+
+
+{% block body %}
+      <h3>{{errormessage}}</h3>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#login" aria-controls="login" role="tab"
+                                                  data-toggle="tab">登录</a></li>
+        <li role="presentation"><a href="#regist" aria-controls="regist" role="tab" data-toggle="tab">注册</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="login">
+            <form action="{% url 'pulls:login' %}" method="post">
+                <form>
+                    {% csrf_token %}
+                    {{ lf }}
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </form>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="regist">
+            <form action="{% url 'pulls:regist' %}" method="post">
+                {% csrf_token %}
+                {{ rf }}
+                <input type="submit" value="注册">
+            </form>
+        </div>
+    </div>
+{% endblock %}

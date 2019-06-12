@@ -1,15 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>投票页</title>
-</head>
-<body>
-    <h1>投票</h1>
+{% extends 'pulls/base.html' %}
+{% block title %}
+投票页面
+{% endblock %}
+
+
+{% block body %}
+
+ <h1>投票</h1>
     <h2>{{ ques.title }}</h2>
     请选择
     <ul>
         <form action="{% url 'pulls:toup' ques.id %}" method="post">
+            {% csrf_token %}
             {% for i in ques.toup_set.all %}
             {% if forloop.counter == 1 %}
             <li><input type="radio" checked name="info" value="{{ i.id }}">{{ i.name }}</li>
@@ -20,7 +22,4 @@
             <input type="submit" name="提交">
         </form>
     </ul>
-
-
-</body>
-</html>
+{% endblock %}

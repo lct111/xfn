@@ -1,8 +1,10 @@
 from django.shortcuts import render,redirect,reverse
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Question, Toup
+from .models import Question, Toup,MyUser
 from django.template import loader
 from django.views.generic import View
+from .form import MyUserLogin,MyUserRegist
+from django.contrib.auth import authenticate,login,logout
 
 
 # Create your views here.
@@ -10,12 +12,14 @@ from django.views.generic import View
 def checklogin(fun):
     def check(self,req,*args):
         #session方法
-        if req.session.get('username'):
-            return fun(self,req,*args)
+        # if req.session.get('username'):
+        #     return fun(self,req,*args)
 
         #cookies方法
         # if req.COOKIES.get('username'):
         #     return fun(self,req,*args)
+        if req.user and req.user.is_authenticated:
+            return fun(self,req,*args)
         else:
             return redirect(reverse('pulls:login'))
     return check
@@ -53,17 +57,46 @@ class ResultView(View):
 class LoginView(View):
 
     def get(self,req):
-        return render(req,'pulls/login.html')
+        lf=MyUserLogin()
+        rf=MyUserRegist()
+        return render(req,'pulls/login_regist.html',locals())
 
     def post(self,req):
         username=req.POST.get('username')
-        pwd=req.POST.get('password')
+        password=req.POST.get('password')
 
-        #session方法
-        req.session['username']=username
-        return redirect(reverse('pulls:index'))
+        user=authenticate(req,username=username,password=password)
+        if user:
+            login(req,user)
+            return redirect(reverse('pulls:index'))
 
-        #cookie方法
-        # res=redirect(reverse('pulls:index'))
-        # res.set_cookie('username',username)
-        # return res
+        else:
+            lf = MyUserLogin()
+            rf = MyUserRegist()
+            errormessage='登录失败'
+            return render(req,'pulls/login_regist.html',locals())
+
+
+class RegisteView(View):
+    def get(self,req):
+        pass
+    def post(self,req):
+        username=req.POST.get('username')
+        password=req.POST.get('password')
+        email=req.POST.get('email')
+
+        user=MyUser.objects.create_user(username=username,email=email,password=password)
+        if user:
+            return redirect(reverse('pulls:login'))
+
+        else:
+            lf=MyUserLogin()
+            rf=MyUserRegist()
+            errormessage='注册失败'
+            return render(req,'pulls/login_regist.html',locals())
+
+
+class LogOutView(View):
+    def get(self,req):
+        logout(req)
+        return redirect(reverse('pulls:login'))

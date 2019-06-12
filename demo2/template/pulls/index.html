@@ -1,15 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>首页</title>
-</head>
-<body>
-    <h1>投票页面汇总</h1>
+{% extends 'pulls/base.html' %}
+
+{% block title %}
+    投票列表页
+{% endblock %}
+
+{% block body %}
+    {% if req.user and request.user.is_authenticated %}
+        <h3>当前用户为{{ req.user }}<a href="{% url 'pulls:logout' %}">退出</a> </h3>
+    {% endif %}
+
+   <br>
+
+       <h1>投票页面汇总</h1>
     <ul>
         {% for i in question %}
         <li><a href="{% url 'pulls:toup' i.id %}">{{ i.title }}</a> </li>
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}
