@@ -29,20 +29,28 @@
                         {% csrf_token %}
                         <div class="row">
                             <div class="col-md-4">
-                                <label for="id_name">名字：</label>
-                                <input type="text" id="id_name" name="name" required>
+<!--                                <label for="id_name">名字：</label>-->
+<!--                                <input type="text" id="id_name" name="name" required>-->
+                                {{ pf.name.label }}
+                                {{ pf.name }}
                             </div>
                             <div class="col-md-4">
-                                <label for="id_email">邮箱：</label>
-                                <input type="email" id="id_email" name="email" required>
+<!--                                <label for="id_email">邮箱：</label>-->
+<!--                                <input type="email" id="id_email" name="email" required>-->
+                                {{ pf.email.label }}
+                                {{ pf.email }}
                             </div>
                             <div class="col-md-4">
-                                <label for="id_url">网址：</label>
-                                <input type="text" id="id_url" name="url">
+<!--                                <label for="id_url">网址：</label>-->
+<!--                                <input type="text" id="id_url" name="url">-->
+                                {{ pf.url.label }}
+                                {{ pf.url }}
                             </div>
                             <div class="col-md-12">
-                                <label for="id_comment">评论：</label>
-                                <textarea name="content" id="id_comment" required></textarea>
+<!--                                <label for="id_comment">评论：</label>-->
+<!--                                <textarea name="content" id="id_comment" required></textarea>-->
+                                {{ pf.content.label }}
+                                {{ pf.content }}
                                 <button type="submit" class="comment-btn">发表</button>
                             </div>
                         </div>    <!-- row -->
