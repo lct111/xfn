@@ -1,0 +1,92 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+详情页
+{% endblock %}
+
+{% block left %}
+
+<article class="post post-{{ at.id }}">
+                    <header class="entry-header">
+                        <h1 class="entry-title">{{ artical.title }}</h1>
+                        <div class="entry-meta">
+                            <span class="post-category"><a href="#">{{ artical.category.title }}</a></span>
+                            <span class="post-date"><a href="#"><time class="entry-date"
+                                                                      datetime="2012-11-09T23:15:57+00:00">{{ artical.creat_time }}</time></time></a></span>
+                            <span class="post-author"><a href="#">{{ artical.outher.username }}</a></span>
+                            <span class="comments-link"><a href="#">{{ artical.pinglun_set.count }} 评论</a></span>
+                            <span class="views-count"><a href="#">{{ artical.views }} 阅读</a></span>
+                        </div>
+                    </header>
+                    <div class="entry-content clearfix">
+                        <p>{{ artical.content }}</p>
+                    </div>
+                </article>
+<section class="comment-area" id="comment-area">
+                    <hr>
+                    <h3>发表评论</h3>
+                    <form action="{% url 'blog:single' artical.id %}" method="post" class="comment-form">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="id_name">名字：</label>
+                                <input type="text" id="id_name" name="name" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="id_email">邮箱：</label>
+                                <input type="email" id="id_email" name="email" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="id_url">网址：</label>
+                                <input type="text" id="id_url" name="url">
+                            </div>
+                            <div class="col-md-12">
+                                <label for="id_comment">评论：</label>
+                                <textarea name="content" id="id_comment" required></textarea>
+                                <button type="submit" class="comment-btn">发表</button>
+                            </div>
+                        </div>    <!-- row -->
+                    </form>
+                    <div class="comment-list-panel">
+                        <h3>评论列表，共 <span>{{ artical.pinglun_set.count }}</span> 条评论</h3>
+                        <ul class="comment-list list-unstyled">
+                            {% for w in artical.pinglun_set.all %}
+                            <li class="comment-item">
+                                <span class="nickname">{{ w.name }}</span>
+                                <time class="submit-date" datetime="2012-11-09T23:15:57+00:00">{{ w.pinglun_time }}</time>
+                                <div class="text">
+                                    {{ w.content }}
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </section>
+
+{% endblock %}
+
+{% block right %}
+
+<div class="widget widget-content">
+                    <h3 class="widget-title">文章目录</h3>
+                    <ul>
+                        <li>
+                            <a href="#">教程特点</a>
+                        </li>
+                        <li>
+                            <a href="#">谁适合这个教程</a>
+                        </li>
+                        <li>
+                            <a href="#">在线预览</a>
+                        </li>
+                        <li>
+                            <a href="#">资源列表</a>
+                        </li>
+                        <li>
+                            <a href="#">获取帮助</a>
+                        </li>
+                    </ul>
+                </div>
+
+{% endblock %}
+
