@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block left %}
-    {% for at in artical %}
+    {% for at in page.object_list %}
     <article class="post post-{{ at.id }}">
                     <header class="entry-header">
                         <h1 class="entry-title">
@@ -38,15 +38,21 @@
 -->
 <div class="pagination">
                     <ul>
-                        <li><a href="">1</a></li>
-                        <li><a href="">...</a></li>
-                        <li><a href="">4</a></li>
-                        <li><a href="">5</a></li>
-                        <li class="current"><a href="">6</a></li>
-                        <li><a href="">7</a></li>
-                        <li><a href="">8</a></li>
-                        <li><a href="">...</a></li>
-                        <li><a href="">11</a></li>
+                        {% if page.has_previous %}
+                            <li><a href="{{ page.path }}?page={{ page.previous_page_number }}">上一页</a></li>
+                        {% endif %}
+
+                        {% for i in page.paginator.page_range %}
+                        {% if i == page.number %}
+                        <li class="current"><a href="#">{{ i }}</a></li>
+                        {% else %}
+                        <li><a href="{{ page.path }}?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+
+                        {% if page.has_next %}
+                            <li><a href="{{ page.path }}?page={{ page.next_page_number }}">下一页</a></li>
+                        {% endif %}
                     </ul>
                 </div>
 

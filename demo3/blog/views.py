@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect,reverse
 from django.views.generic import View
 from django.shortcuts import get_object_or_404
 from .models import *
+from django.core.paginator import Paginator
+import markdown
 
 from comments.forms import PlForm
 
@@ -11,13 +13,31 @@ class IndexView(View):
 
     def get(self,req):
         artical = Artical.objects.all()
-        return render(req,'blog/index.html',locals())
+
+        #得到分页
+        paginator = Paginator(artical,1)
+        #得到页面
+        pagenum=req.GET.get('page')
+        pagenum = 1 if pagenum == None else pagenum
+        page = paginator.get_page(pagenum)
+        page.path = '/'
+
+        return render(req,'blog/index.html',{'page':page})
 
 class SingleView(View):
 
     def get(self,req,id):
         pf = PlForm()
         artical = get_object_or_404(Artical,pk=id)
+
+        md = markdown.Markdown(extensions=[
+            'markdown.extensions.extra',
+            'markdown.extensions.codehilite',
+            'markdown.extensions.toc',
+        ])
+        artical.content = md.convert(artical.content)
+        artical.toc=md.toc
+
         return render(req,'blog/single.html',locals())
 
     def post(self,req,id):
@@ -43,7 +63,14 @@ class AtitleView(View):
     def get(self,req,year,month):
         artical = Artical.objects.filter(creat_time__year=year,creat_time__month=month)
 
-        return render(req,'blog/index.html',locals())
+        # 得到分页
+        paginator = Paginator(artical, 1)
+        # 得到页面
+        pagenum = req.GET.get('page')
+        pagenum = 1 if pagenum == None else pagenum
+        page = paginator.get_page(pagenum)
+        page.path = '/atitle/%s/%s/'%(year,month)
+        return render(req,'blog/index.html',{'page':page})
 
 class CategoryView(View):
 
@@ -51,12 +78,28 @@ class CategoryView(View):
         category=get_object_or_404(Category,pk = id)
         artical = category.artical_set.all()
 
-        return render(req, 'blog/index.html', locals())
+        # 得到分页
+        paginator = Paginator(artical, 1)
+        # 得到页面
+        pagenum = req.GET.get('page')
+        pagenum = 1 if pagenum == None else pagenum
+        page = paginator.get_page(pagenum)
+        page.path = '/category/%s/' %(id,)
+        return render(req, 'blog/index.html', {'page':page})
 
 class TagView(View):
 
     def get(self,req,id):
         tag = get_object_or_404(Tag,pk = id)
         artical = tag.artical_set.all()
-        return render(req,'blog/index.html',locals())
+
+        # 得到分页
+        paginator = Paginator(artical, 1)
+        # 得到页面
+        pagenum = req.GET.get('page')
+        pagenum = 1 if pagenum == None else pagenum
+        page = paginator.get_page(pagenum)
+        page.path = '/tags/%s/' % (id,)
+        return render(req, 'blog/index.html', {'page': page})
+
 
