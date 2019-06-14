@@ -10,3 +10,7 @@ class Pinglun(models.Model):
     email = models.EmailField(blank=True,null=True,verbose_name="邮箱")
     url = models.URLField(blank=True,null=True,verbose_name="网址")
     artical = models.ForeignKey(Artical,on_delete=True)
+
+
+    def __str__(self):
+        return self.name

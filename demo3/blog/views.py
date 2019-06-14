@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect,reverse
 from django.views.generic import View
 from django.shortcuts import get_object_or_404
 from .models import *
-from comments.models import Pinglun
+
 from comments.forms import PlForm
 
 # Create your views here.
@@ -37,3 +37,26 @@ class SingleView(View):
 
         c.save()
         return redirect(reverse('blog:single',args=(id,)))
+
+class AtitleView(View):
+
+    def get(self,req,year,month):
+        artical = Artical.objects.filter(creat_time__year=year,creat_time__month=month)
+
+        return render(req,'blog/index.html',locals())
+
+class CategoryView(View):
+
+    def get(self,req,id):
+        category=get_object_or_404(Category,pk = id)
+        artical = category.artical_set.all()
+
+        return render(req, 'blog/index.html', locals())
+
+class TagView(View):
+
+    def get(self,req,id):
+        tag = get_object_or_404(Tag,pk = id)
+        artical = tag.artical_set.all()
+        return render(req,'blog/index.html',locals())
+
