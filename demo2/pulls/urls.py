@@ -11,5 +11,6 @@ urlpatterns=[
     url(r'^regist/$',RegisteView.as_view(),name='regist'),
     url(r'^logout/$',LogOutView.as_view(),name='logout'),
     url(r'^checkusername/$',CheckUserNameView.as_view(), name="checkusername"),
+    url(r'^verify/$',VerifyView.as_view(), name="verify"),
 
 ]

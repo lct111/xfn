@@ -9,6 +9,10 @@
 
 <script>
     $(function () {
+        $("#myimg").click( function(){
+                $("#myimg").attr("src","/verify/?t="+ new Date().getTime()  )
+            } );
+
         $("#id_username").blur(function(){
          $.ajax({
                     type:"get",
@@ -48,6 +52,8 @@
                     <li id="errorinfo"></li>
                     {% csrf_token %}
                     {{ lf }}
+                    <label for="id_verify">验证码:</label> <img id="myimg"  width="100" height="35" src="{% url 'pulls:verify' %}" alt="">
+                    <input type="text" name="verify" class="form-control" maxlength="150" required="" id="id_verify">
                     <button type="submit" class="btn btn-default">Submit</button>
                 </form>
             </form>

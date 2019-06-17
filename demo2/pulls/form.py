@@ -10,9 +10,11 @@ class MyUserLogin(forms.ModelForm):
         widgets = {"password": forms.PasswordInput(attrs={"class": "form-control"}),
                    "username": forms.TextInput(attrs={"class": "form-control"})
                    }
+
         help_texts = {
             "username": gettext_lazy(""),
         }
+
 
 class MyUserRegist(forms.ModelForm):
 
