@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-    {% if req.user and request.user.is_authenticated %}
+    {% if req.user and req.user.is_authenticated %}
         <h3>当前用户为{{ req.user }}<a href="{% url 'pulls:logout' %}">退出</a> </h3>
     {% endif %}
 

@@ -29,8 +29,7 @@ class IndexView(View):
     @checklogin
     def get(self,req):
         question = Question.objects.all()
-
-        res = loader.get_template('pulls/index.html').render({'question': question})
+        res = loader.get_template('pulls/index.html').render({'question': question,'req':req})
         return HttpResponse(res)
 
 class ToupView(View):
