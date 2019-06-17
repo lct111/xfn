@@ -35,3 +35,11 @@ class Artical(models.Model):
 
     def __str__(self):
         return self.title
+
+class Adss(models.Model):
+    pic = models.ImageField(upload_to='ads')
+    ms = models.CharField(max_length=20)
+    url = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.ms

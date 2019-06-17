@@ -1,4 +1,4 @@
-from ..models import Artical,Category,Tag
+from ..models import Artical,Category,Tag,Adss
 from django.template import Library
 
 register=Library()
@@ -24,3 +24,7 @@ def getcategory():
 @register.simple_tag
 def gettags():
     return  Tag.objects.all()
+
+@register.simple_tag
+def getadss():
+    return Adss.objects.all()
