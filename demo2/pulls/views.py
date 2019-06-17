@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,reverse
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect,JsonResponse
 from .models import Question, Toup,MyUser
 from django.template import loader
 from django.views.generic import View
@@ -64,7 +64,10 @@ class LoginView(View):
         username=req.POST.get('username')
         password=req.POST.get('password')
 
+        print(MyUser.objects.filter(username=username))
         user=authenticate(req,username=username,password=password)
+        print(user)
+        print("+++++++++++")
         if user:
             login(req,user)
             return redirect(reverse('pulls:index'))
@@ -99,3 +102,16 @@ class LogOutView(View):
     def get(self,req):
         logout(req)
         return redirect(reverse('pulls:login'))
+
+class CheckUserNameView(View):
+    def get(self,req):
+        username = req.GET.get("username")
+        print(MyUser.objects.filter(username = username))
+        # for r in MyUser.objects.filter(username = username):
+        #     print('++',r.username,'++')
+        user = MyUser.objects.filter(username = username).first()
+
+        if user:
+            return JsonResponse({"statecode":"1"} )
+        else:
+            return JsonResponse({"statecode":"0","error":"用户名不存在"})

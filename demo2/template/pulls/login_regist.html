@@ -4,6 +4,32 @@
     登录
 {% endblock %}
 
+{% block script %}
+<script src="/static/js/main.js"></script>
+
+<script>
+    $(function () {
+        $("#id_username").blur(function(){
+         $.ajax({
+                    type:"get",
+                    url:"/checkusername/?username="+$("#id_username").val(),
+                    success:function(data){
+                        console.log(data);
+                        if(data["statecode"]==0)
+                        {
+                            $("#errorinfo").text(data["error"] )
+                        }
+                        else{
+                            $("#errorinfo").text("")
+                        }
+                    }
+
+                })
+        })
+    })
+</script>
+
+{% endblock %}
 
 {% block body %}
       <h3>{{errormessage}}</h3>
@@ -19,6 +45,7 @@
         <div role="tabpanel" class="tab-pane active" id="login">
             <form action="{% url 'pulls:login' %}" method="post">
                 <form>
+                    <li id="errorinfo"></li>
                     {% csrf_token %}
                     {{ lf }}
                     <button type="submit" class="btn btn-default">Submit</button>
