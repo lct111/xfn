@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from tinymce.models import HTMLField
 
 # Create your models here.
 
@@ -43,3 +44,13 @@ class Adss(models.Model):
 
     def __str__(self):
         return self.ms
+
+class MessageInfo(models.Model):
+    email = models.EmailField()
+
+    #文本类型没有格式，所以使用富文本
+    # info = models.TextField()
+    info = HTMLField()
+
+    def __str__(self):
+        return self.email

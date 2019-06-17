@@ -4,7 +4,9 @@ from django.shortcuts import get_object_or_404
 from .models import *
 from django.core.paginator import Paginator
 import markdown
-
+from django.core.mail import send_mail,EmailMultiAlternatives
+from demo3 import settings
+from django.http import HttpResponse
 from comments.forms import PlForm
 
 # Create your views here.
@@ -102,4 +104,36 @@ class TagView(View):
         page.path = '/tags/%s/' % (id,)
         return render(req, 'blog/index.html', {'page': page})
 
+class SendmailView(View):
 
+    def get(self,req):
+        try:
+            mail = EmailMultiAlternatives(subject="测试邮件html格式",
+                                          body="<h1>  <a href = 'http://www.baidu.com'> 百度 </a>  </h1>",
+                                          from_email=settings.DEFAULT_FROM_EMAIL,
+                                          to=["18837597987@163.com", "zhangzhaoyu@qikux.com"])
+            mail.content_subtype = "html"
+            mail.send()
+
+            return HttpResponse('发送成功')
+
+        except:
+            return HttpResponse('发送失败')
+
+
+
+class ContactView(View):
+
+    def get(self,req):
+        return render(req,'blog/contact.html')
+
+    def post(self,req):
+        email = req.POST.get('email')
+        info = req.POST.get('message')
+
+        message = MessageInfo()
+        message.email = email
+        message.info = info
+        message.save()
+
+        return HttpResponse('建议成功')
