@@ -12,5 +12,6 @@ urlpatterns=[
     url(r'^logout/$',LogOutView.as_view(),name='logout'),
     url(r'^checkusername/$',CheckUserNameView.as_view(), name="checkusername"),
     url(r'^verify/$',VerifyView.as_view(), name="verify"),
+    url(r'^active/(.*?)/$',ActiveView.as_view(), name="active"),
 
 ]

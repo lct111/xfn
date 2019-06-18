@@ -148,10 +148,10 @@ TINYMCE_DEFAULT_CONFIG = {
 }
 
 HAYSTACK_CONNECTIONS = {
-'default': {
-'ENGINE': 'blog.whoosh_cn_backend.WhooshEngine',
-'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
-}
+    'default': {
+        'ENGINE': 'blog.whoosh_cn_backend.WhooshEngine',
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    }
 }
 
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
