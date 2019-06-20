@@ -263,20 +263,20 @@
 
 						<div class="author-id">
 							<div class="media">
-								<h5>About The Author</h5>
-								<img class="media-object pull-left" src="images/author.jpg" alt="...">
+								<h5>关于作者</h5>
+								<img class="media-object pull-left" src="/static/images/q3.jpg" alt="...">
 								<div class="media-body">
-									<h6 class="media-heading">John Mark</h6>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, sequi quibusdam voluptate perferendis veniam eveniet! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis, veritatis.</p>
+									<h6 class="media-heading">徐凤年</h6>
+									<p>北凉出品，必是精品！徐凤年，北凉陆地神仙，从小遭受苦难，最终终成陆地神仙，万人敬仰！</p>
 								</div>	<!-- End of /.media-body -->
 							</div>	<!-- End of /.media -->
 						</div>	<!-- End of /.author-id -->
 
 						<div class="comments-box">
 							<h5>{{ food.comments_set.count }} 评论</h5>
-							{% for c in cc %}
+							{% for c in food.comments_set.all %}
 							<div class="media">
-								<img class="media-object pull-left" src="/static/images/author.jpg" alt="...">
+								<img class="media-object pull-left" src="/static/images/q4.jpg" alt="...">
 								<div class="media-body">
 									<h6 class="media-heading">{{ c.name }}<span>{{ c.com_time }}</span> <a href=""  class="pull-right">(回复)</a></h6>
 									<p>{{ c.content }}</p>
@@ -421,7 +421,7 @@
 				<div class="col-md-4">
 					<div class="block clearfix">
 						<a href="#">
-							<img src="images/footer-logo.png" alt="">
+							<img src="/static/images/footer-logo.png" alt="">
 						</a>
 						<p>
 							Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
