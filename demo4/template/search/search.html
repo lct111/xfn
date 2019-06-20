@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>搜索结果页</title>
+</head>
+<body>
+<h1>搜索结果</h1>
+
+查询关键字为：{{ query }}
+<br>
+{% for a in page.object_list %}
+
+<a href="{% url 'foods:singleblog' a.object.id %}">{{ a.object }}</a>
+
+{% endfor %}
+
+</body>
+</html>
