@@ -5,7 +5,6 @@ from haystack.views import SearchView
 app_name = 'foods'
 
 urlpatterns = [
-    url(r'^$',IndexView.as_view(),name='index'),
     url(r'^singleblog/(\d+)/$',SingleBlogView.as_view(),name='singleblog'),
     url(r'^blog/$',BlogView.as_view(),name='blog'),
     url(r'^shop/$',ShopView.as_view(),name='shop'),
@@ -18,4 +17,6 @@ urlpatterns = [
     url(r'^logout/$',LogOutView.as_view(),name='logout'),
     # url(r'^checkusername/$',CheckUserNameView.as_view(), name="checkusername"),
     url(r'^search/$',SearchView(),name="search"),
+    # url(r'^shopcar/(\d+)/$',ShopcarView.as_view(),name='shopcar'),
+    url(r'^$', IndexView.as_view(), name='index'),
 ]

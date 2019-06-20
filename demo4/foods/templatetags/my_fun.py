@@ -18,3 +18,7 @@ def getfoods(num=3):
 @register.simple_tag
 def gettag():
     return Tag.objects.all()
+
+# @register.simple_tag
+# def getres():
+#     return Tag.objects.all()

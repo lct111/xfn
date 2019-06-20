@@ -27,7 +27,7 @@ def checklogin(fun):
 
 class IndexView(View):
     @checklogin
-    def get(self, req):
+    def get(self, req,*args):
         adss = Adss.objects.all()
 
         food = Foods.objects.all()[:3]
@@ -246,3 +246,18 @@ class LogOutView(View):
 #             return JsonResponse({"statecode": "1"})
 #         else:
 #             return JsonResponse({"statecode": "0", "erro": "用户名不存在"})
+
+#购物车
+# class ShopcarView(View):
+#
+#     def get(self,req,id):
+#         global res
+#         food = Foods.objects.get(pk=id)
+#         f = food.price
+#         res += f
+#
+#         return redirect(reverse('foods:index'))
+
+
+
+
